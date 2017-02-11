@@ -102,7 +102,7 @@ public class InfPathDetector {
 		spC = new SpaceComplexity();
 		int totalSpC; //use to keep the Approximate Total Space Complexity(for each variable and return statement)
 		String i = " is an is isolated Node";
-		String d = "Infinite Path Dectected from ";
+		String d = "Infinite Path Detected from ";
 		String notd = "No Cycle Dectected from ";
 		String a = "Approximate Total Space Complexity:  ";
 		String b= " bytes";
@@ -188,8 +188,6 @@ public class InfPathDetector {
 		
 		
 		totalSpC= spC.GraphSpaceComplexity(graph)
-				+spC.ListSpaceComplexity(stack)
-				+spC.NodeSpaceComplexity(initialNode)
 				+spC.StringSpaceComplexity(notd+1)
 				+spC.StringSpaceComplexity(i)
 				+spC.StringSpaceComplexity(d)
@@ -213,7 +211,7 @@ public class InfPathDetector {
 	    public static int getInnitialNodeName( ){
 	    	
 	    	scString = new Scanner(System.in);
-	        String input =" Please Enter interger 'Node name' you will like to start your check from. e.g 1 "+"\n";
+	        String input =" Please Enter an interger 'Node name' you will like to start your check from. e.g 1, cann't be 0 "+"\n";
 			System.out.println(input);
 			int n;
 			n = scString.nextInt();
@@ -231,9 +229,9 @@ public class InfPathDetector {
 			Node n;
 			nodes = new ArrayList<Node>();
 			String a ="***********************Infinite Path Dectector**********************";
-			String c ="Please Enter 'y' to enter another Node or 'n' to cancle";
+			String c ="Please Enter 'y' to enter another Node or any other key to cancle";
 			System.out.println(a);
-			char ans; // hold user Answer "Y"for yes and "N" for no
+			char ans; // hold user Answer 
 			
 			
 			do {
@@ -257,16 +255,14 @@ public class InfPathDetector {
 
 		scInt = new Scanner(System.in);
 	    scString = new Scanner(System.in);
-        
-        
-
 	    
-
-	    String inputNode =" Please Enter interget to represent the Node. e.g 1 "+"\n";
-		System.out.println(inputNode);
-		int nodeName =  scInt.nextInt();
-		
-		String outAjcNodes ="Please Enter Node Out Ajacent Nodes, do not include in the current node. e.g 2,3,4, 5";
+	    int nodeName ;
+	    
+        
+        
+	    nodeName = getNodeName();
+	    
+	    String outAjcNodes ="Please Enter Node Out Ajacent Nodes, do not include in the current node. e.g 2,3,4, 5";
 		System.out.println(outAjcNodes);
 		String StringoutAjcNodes = scString .nextLine();
 	    
@@ -276,8 +272,11 @@ public class InfPathDetector {
 	    
 		
 		
-		
-		
+
+	    
+	    
+	    
+	    
 		int[] InAjcNodes = Node.StringToAjcNodes(StringinAjcNodes);
 		int[] OutAjcNodes = Node.StringToAjcNodes(StringoutAjcNodes);
 		
@@ -319,8 +318,9 @@ public class InfPathDetector {
 
 		int numOfArcs = 0;
 	    for( Node node :g.getNodes() ){
+	    	if (node.getOutAjacentArcs()[0] != 0){
 	      numOfArcs += node.getOutAjacentArcs().length;
-	    	
+	    	}
 	    }
 		
 	    return numOfArcs;
@@ -409,9 +409,11 @@ public class InfPathDetector {
     	 
     	 if (g.getNodes().size() != 1){
     	 float NumberOfInArcs = 0;
+    	 
  	    for( Node node :g.getNodes() ){
+ 	    	if (node.getInAjacentArcs()[0] == 0){
  	    	NumberOfInArcs += node.getInAjacentArcs().length;
- 	    	
+ 	    	}
  	    }
  		
  	    return NumberOfInArcs/g.getNodes().size();
@@ -431,16 +433,52 @@ public class InfPathDetector {
   		
   		
   	    for( Node node :g.getNodes() ){
-  	    	NumOfOutArcs = node.getOutAjacentArcs().length;
-  	
+  	    	if (node.getOutAjacentArcs()[0] == 0){
+  	    	NumOfOutArcs += node.getOutAjacentArcs().length;
+  	    	}
   	    	
   	    }
   		
   	    return NumOfOutArcs/g.getNodes().size();
  		
+  		}
+     return 0; 
      }
-  
-	
-     return 0;
-}
-}
+     
+   
+ 
+     
+     
+public static int  getNodeName(){
+    	 
+    	 int nodeName = 0;
+		 String inputNode =" Please Enter integer to represent the Node. e.g 1 cann't be 0  "+"\n";
+		 System.out.println(inputNode);
+		 scInt = new Scanner(System.in);
+		 // scInt.hasNextInt();
+    	 
+    	 while (!scInt.hasNextInt()){  
+  	 		 System.out.println(inputNode);
+  	 		scInt.next();//Go to next
+  	 		 }
+    	nodeName = scInt.nextInt();
+       return nodeName;
+       
+
+ 		
+ 	   }
+ 		
+
+
+ }
+		
+ 
+ 
+ 
+
+     
+ 		
+     
+     
+     
+     

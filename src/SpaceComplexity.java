@@ -58,12 +58,19 @@ public class SpaceComplexity {
     	List <Node>  ln =  lnodes;
     	int nodesSpaceComplexity= 0;
     	
-    	if (ln == null){
+    	if (ln.size() == 0){
     		
     		return INT_HEADER_INFORMATION + INT_HEADER_INFORMATION*2;}
     	
+    	else if (ln.size() == 1){
+        	 nodesSpaceComplexity+= NodeSpaceComplexity(ln.get(0));
+    		
+    		return nodesSpaceComplexity +
+    	 			  LIST_HEADER_INFORMATION;
+    	}
     	
-    	for(Node n :ln ){
+    else 
+    	 for(Node n :ln ){
     		
     		nodesSpaceComplexity+= NodeSpaceComplexity(n);
     	}
@@ -82,15 +89,24 @@ public class SpaceComplexity {
     	
     	Node node = n;
     	
-    	if ((node.getInAjacentArcs() == null) && node.getOutAjacentArcs() == null){
+    	if ((node.getInAjacentArcs().length == 0) && node.getOutAjacentArcs().length == 0){
     		
-    		return INT_FIELD_SIZE + INT_HEADER_INFORMATION*2;
+    		return INT_FIELD_SIZE + INT_HEADER_INFORMATION*2;// in case of isolated node
+    	}
+    	else if ((node.getInAjacentArcs().length == 0) && node.getOutAjacentArcs().length != 0){
+    		
+    		return IntArraySpaceComplexity(node.getInAjacentArcs())
+			+OBJREF_HEADER_INFORMATION ;
     	}
     	
-    			return IntArraySpaceComplexity(node.getInAjacentArcs())
+    	else if ((node.getInAjacentArcs().length != 0) && node.getOutAjacentArcs().length == 0){
+    		return IntArraySpaceComplexity(node.getInAjacentArcs())+OBJREF_HEADER_INFORMATION ;
+		}
+		
+    	else  return IntArraySpaceComplexity(node.getInAjacentArcs())
     	    			+IntArraySpaceComplexity(node.getOutAjacentArcs())
     	    			+OBJREF_HEADER_INFORMATION ;
-    			// in case of isolated node
+    			
     	
     	
     	
