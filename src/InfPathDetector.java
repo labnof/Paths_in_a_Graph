@@ -40,8 +40,19 @@ public class InfPathDetector {
 		long lStartTime = System.nanoTime();// indicates(holds) the Start Time of Program
 		listOfNodes = MakeListOfNodes();
 		G = new Graph(listOfNodes);
-		v = getInnitialNodeName( );
 		spC = new SpaceComplexity();
+		char ans;
+		
+	
+		//v = getInnitialNodeName( );
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		int number_of_nodes = listOfNodes.size();
@@ -57,32 +68,52 @@ public class InfPathDetector {
 		float av_num_of_in_arcs   = getAveNumberOfInArcs(G);
 		
 		
-		long fStartTime = System.nanoTime();
-		String InfPathResult = InfPath(G,v);
-		long fEndTime = System.nanoTime(); // indicates(holds) the End Time of Algorithm (Method)
-        long foutput = fEndTime - fStartTime; //time elapsed
-        
-        
-	
-	    
-		System.out.println(InfPathResult);
-		System.out.println("Number of nodes: "+number_of_nodes);
-		System.out.println("Number of arcs: "+number_of_arcs +"\n");
-		System.out.println("Maximum number of out going of arcs: "+max_num_of_out_arcs);
-		System.out.println("Minimum number of out going arcs: "+min_num_of_out_arcs+"\n");
-		System.out.println("Maximum number of in coming arcs: "+max_num_of_in_arcs);
-		System.out.println("Minimum number of in coming arcs: "+min_num_of_in_arcs+"\n");
-		System.out.println("Average number of out going arcs: "+ av_num_of_out_arcs);
-		System.out.println("Average number of in coming arcs: "+av_num_of_in_arcs+"\n");
-		System.out.println("Graph was created and examined in: " + foutput / 1000000 + " milliseconds");
-		//end
-        long lEndTime = System.nanoTime(); // indicates(holds) the End Time of Program
-        //time elapsed
-        long output = lEndTime - lStartTime;
+		//long fStartTime = System.nanoTime();
+		
+		
+    do {
+    	    long fStartTime = System.nanoTime();
+			v = getInnitialNodeName( );
+            String InfPathResult = InfPath(G,v);
+            System.out.println(InfPathResult);
+            long fEndTime = System.nanoTime(); // indicates(holds) the End Time of Algorithm (Method)
+            long foutput = fEndTime - fStartTime; //time elapsed
+            
 
-        System.out.println("Total time elapsed in milliseconds (Time Complexity): " + output / 1000000 + "\n");
-  
-        System.out.println("Approximate memory used by graph (Space Complexity): " + spC.GraphSpaceComplexity(G) +" bytes");
+            
+            
+            System.out.println("Number of nodes: "+number_of_nodes);
+    		System.out.println("Number of arcs: "+number_of_arcs +"\n");
+    		System.out.println("Maximum number of out going of arcs: "+max_num_of_out_arcs);
+    		System.out.println("Minimum number of out going arcs: "+min_num_of_out_arcs+"\n");
+    		System.out.println("Maximum number of in coming arcs: "+max_num_of_in_arcs);
+    		System.out.println("Minimum number of in coming arcs: "+min_num_of_in_arcs+"\n");
+    		System.out.printf("Average number of out going arcs: "+"%.2f"+"\n",av_num_of_out_arcs);
+    		System.out.printf("Average number of in coming arcs: "+"%.2f"+"\n",av_num_of_in_arcs);
+   
+    		System.out.println("Graph was created and examined in: " + foutput / 1000000 + " milliseconds");
+    		//end
+            long lEndTime = System.nanoTime(); // indicates(holds) the End Time of Program
+            //time elapsed
+            long output = lEndTime - lStartTime;
+            System.out.println("Total time elapsed in milliseconds (Time Complexity): " + output / 1000000 + "\n");
+            System.out.println("Approximate memory used by graph (Space Complexity): " + spC.GraphSpaceComplexity(G) +" bytes" + "\n \n");
+    		
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            System.out.println("please press y and Enter key to check from another Node or any other key to end program");
+            ans = scString.next(".").charAt(0);
+        } while (ans == 'y');
+		
 		
 		
 		
@@ -406,21 +437,18 @@ public class InfPathDetector {
      public static float getAveNumberOfInArcs(Graph graph){
 		
     	 Graph g = graph;
-    	 
-    	 if (g.getNodes().size() != 1){
     	 float NumberOfInArcs = 0;
     	 
+    	 if (g.getNodes().size() != 1){
+   
  	    for( Node node :g.getNodes() ){
- 	    	if (node.getInAjacentArcs()[0] == 0){
+ 	    	if (node.getInAjacentArcs()[0] != 0){
  	    	NumberOfInArcs += node.getInAjacentArcs().length;
- 	    	}
- 	    }
- 		
- 	    return NumberOfInArcs/g.getNodes().size();
+ 	    	}	  
+  }
+    	 return NumberOfInArcs/g.getNodes().size();
     	 }
-    	 
     	 return 0;
-    	 
     }
      
      public static float  getAveNumberOfOutArcs(Graph graph){
@@ -433,16 +461,14 @@ public class InfPathDetector {
   		
   		
   	    for( Node node :g.getNodes() ){
-  	    	if (node.getOutAjacentArcs()[0] == 0){
+  	    	if (node.getOutAjacentArcs()[0] != 0){
   	    	NumOfOutArcs += node.getOutAjacentArcs().length;
   	    	}
   	    	
   	    }
-  		
-  	    return NumOfOutArcs/g.getNodes().size();
- 		
-  		}
-     return 0; 
+  	  return NumOfOutArcs/g.getNodes().size() ;
+  	}
+  		return 0;
      }
      
    
