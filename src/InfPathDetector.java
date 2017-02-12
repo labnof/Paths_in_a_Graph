@@ -80,7 +80,7 @@ public class InfPathDetector {
             long foutput = fEndTime - fStartTime; //time elapsed
             
 
-            
+            System.out.println("**********Results********");
             
             System.out.println("Number of nodes: "+number_of_nodes);
     		System.out.println("Number of arcs: "+number_of_arcs +"\n");
@@ -293,11 +293,11 @@ public class InfPathDetector {
         
 	    nodeName = getNodeName();
 	    
-	    String outAjcNodes ="Please Enter Node Out Ajacent Nodes, do not include in the current node. e.g 2,3,4, 5";
+	    String outAjcNodes ="Please Enter Node's Out Ajacent Nodes, do not include in the current node. e.g 2,3,4, 5 or blank if no out Ajacent Nodes";
 		System.out.println(outAjcNodes);
 		String StringoutAjcNodes = scString .nextLine();
 	    
-		String inAjcNodes ="Please Enter Node in Ajacent Nodes, do not include in the current node. e.g 2,3,4, 5";
+		String inAjcNodes ="Please Enter Node's in Ajacent Nodes, do not include in the current node. e.g 2,3,4, 5 or blank if no in Ajacent Nodes";
 		System.out.println(inAjcNodes);
 		String StringinAjcNodes = scString.nextLine();
 	    
